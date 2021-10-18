@@ -726,12 +726,14 @@ set the `address` parameter when creating the RayPipeline instance.
 #### \_\_init\_\_
 
 ```python
- | __init__(address: str = None, **kwargs)
+ | __init__(address: str = None, detached: bool = False, **kwargs)
 ```
 
 **Arguments**:
 
 - `address`: The IP address for the Ray cluster. If set to None, a local Ray instance is started.
+- `detached`: Whether the Pipeline should be detached to this script. If set to True, the Pipeline
+                 continues to run even after exiting the script.
 - `kwargs`: Optional parameters for initializing Ray.
 
 <a name="pipeline.RayPipeline.load_from_yaml"></a>
@@ -739,7 +741,7 @@ set the `address` parameter when creating the RayPipeline instance.
 
 ```python
  | @classmethod
- | load_from_yaml(cls, path: Path, pipeline_name: Optional[str] = None, overwrite_with_env_variables: bool = True, address: Optional[str] = None, **kwargs, ,)
+ | load_from_yaml(cls, path: Path, pipeline_name: Optional[str] = None, overwrite_with_env_variables: bool = True, address: Optional[str] = None, ray_deployment_name: Optional[str] = None, **kwargs, ,)
 ```
 
 Load Pipeline from a YAML file defining the individual components and how they're tied together to form
@@ -785,6 +787,23 @@ Here's a sample configuration:
                                      variable 'MYDOCSTORE_PARAMS_INDEX=documents-2021' can be set. Note that an
                                      `_` sign must be used to specify nested hierarchical properties.
 - `address`: The IP address for the Ray cluster. If set to None, a local Ray instance is started.
+
+<a name="pipeline._RayPipelineWrapperNode"></a>
+## \_RayPipelineWrapperNode Objects
+
+```python
+@serve.deployment
+class _RayPipelineWrapperNode(Pipeline)
+```
+
+<a name="pipeline._RayPipelineWrapperNode.__call__"></a>
+#### \_\_call\_\_
+
+```python
+ | async __call__(request)
+```
+
+Ray calls this method which is then re-directed to the corresponding component's run().
 
 <a name="pipeline._RayDeploymentWrapper"></a>
 ## \_RayDeploymentWrapper Objects
