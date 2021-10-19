@@ -19,7 +19,7 @@ from rest_api.controller.router import router as api_router
 
 
 def get_application() -> FastAPI:
-    application = FastAPI(title="Haystack-API", debug=True, version="0.1", root_path=ROOT_PATH)
+    application = FastAPI(title="Exafluence-QA-API", debug=True, version="0.1", root_path=ROOT_PATH)
 
     # This middleware enables allow all cross-domain requests to the API from a browser. For production
     # deployments, it could be made more restrictive.
