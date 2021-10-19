@@ -56,7 +56,7 @@ def main():
     eval_labels = os.getenv("EVAL_FILE", "eval_labels_example.csv")
 
     # UI search bar and sidebar
-    st.write("# Haystack Demo")
+    st.write("# Exafluence Demo")
     st.sidebar.header("Options")
     top_k_reader = st.sidebar.slider("Max. number of answers", min_value=1, max_value=10, value=3, step=1)
     top_k_retriever = st.sidebar.slider(
@@ -118,7 +118,7 @@ def main():
 
     raw_json_feedback = ""
 
-    with st.spinner("⌛️ &nbsp;&nbsp; Haystack is starting..."):
+    with st.spinner("⌛️ &nbsp;&nbsp; Setting up..."):
         if not haystack_is_ready():
             st.error("🚫 &nbsp;&nbsp; Connection Error. Is Haystack running?")
             run_query = False
@@ -127,8 +127,7 @@ def main():
     if run_query:
         with st.spinner(
             "🧠 &nbsp;&nbsp; Performing neural search on documents... \n "
-            "Do you want to optimize speed or accuracy? \n"
-            "Check out the docs: https://haystack.deepset.ai/usage/optimization "
+            "Do you want to optimize speed or accuracy? Look for optimization documentation"
         ):
             try:
                 results, raw_json = retrieve_doc(question, top_k_reader=top_k_reader, top_k_retriever=top_k_retriever)
