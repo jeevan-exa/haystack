@@ -26,9 +26,9 @@ services:
     environment:
       - discovery.type=single-node
   ui:
-    build:
-      context: ui
-      dockerfile: Dockerfile
+#     build:
+#       context: ui
+#       dockerfile: Dockerfile
     image: "deepset/haystack-streamlit-ui:latest"
     ports:
       - 8501:8501
